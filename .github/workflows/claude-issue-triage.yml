@@ -53,7 +53,12 @@ jobs:
                `gh issue comment ${{ github.event.issue.number }} --edit-last --create-if-none --body-file diagnostico.md`
                Así, al editar el issue se actualiza el mismo comentario en lugar de crear otro.
 
-            El comentario debe estar en español y seguir esta estructura:
+            El comentario debe estar en español y escrito en Markdown compatible con GitHub
+            (GitHub Flavored Markdown): usa encabezados `##`/`###`, listas, **negritas**,
+            `código en línea` y bloques de código con triple backtick indicando el lenguaje
+            (por ejemplo ```js). Escribe el Markdown tal cual en `diagnostico.md`, sin envolverlo
+            en un bloque de código ni escapar sus caracteres, para que GitHub lo renderice.
+            Debe seguir esta estructura:
 
             ## 🤖 Diagnóstico automático
 
