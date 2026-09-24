@@ -20,7 +20,7 @@ All game logic lives in `game.js`, a single classic (non-module) script in `'use
 
 Key conventions that span several functions:
 
-- **Piece type = color index = board cell value.** `PIECES[t]` matrices are filled with the value `t` (1–7), and `COLORS[t]` is its color. `merge()` copies those values straight into `board`, so a cell's value is also its color. Index 0 / `null` means empty. If you add or reorder pieces, keep `PIECES`, `COLORS`, and `randomPiece()` (hardcoded `* 7`) in sync.
+- **Piece type = color index = board cell value.** `PIECES[t]` matrices are filled with the value `t` (1–8), and `COLORS[t]` is its color. `merge()` copies those values straight into `board`, so a cell's value is also its color. Index 0 / `null` means empty. If you add or reorder pieces, keep `PIECES` and `COLORS` in sync (`randomPiece()` uses `PIECES.length - 1`).
 - **Collision is the single gate for movement.** Every move, rotation, drop, the ghost projection (`ghostY`), and spawn-time game-over detection go through `collide(shape, x, y)`. Cells above the board (`y < 0`) count as free.
 - **Rotation** is clockwise only (`rotateCW`, a transpose-and-reverse on the square matrix). `tryRotate` applies a simple horizontal kick list `[0, -1, 1, -2, 2]`. This is not SRS.
 - **Piece lifecycle:** gravity in `loop` / `softDrop` / `hardDrop` → `lockPiece()` → `merge()` → `clearLines()` (updates score, lines, level, and `dropInterval`) → `spawn()` (promotes `next`, and calls `endGame()` if the new piece collides immediately).
